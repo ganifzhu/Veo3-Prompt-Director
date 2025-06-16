@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veo3 Prompt Director | Dibuat oleh Ganif Susanto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-lexend { font-family: 'Lexend', sans-serif; }
+        .prompt-output { font-family: 'Courier New', Courier, monospace; }
+        .preset-btn {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .preset-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <div class="min-h-screen p-4 sm:p-8">
+        <div class="max-w-8xl mx-auto">
+            <header class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold font-lexend text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Veo3 Prompt Director</h1>
+                <p class="text-lg text-gray-400 mt-2">Rancang adegan sinematik Anda dari cerita, visual, hingga audio.</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- INPUT COLUMN -->
+                <div class="space-y-8">
+                    <!-- Section: Story -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-bold font-lexend text-purple-400 flex items-center gap-3"><span>🎬</span> Pilar 1: Cerita & Narasi</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Konsep Utama Adegan</label>
+                                <textarea id="mainConcept" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: Seorang detektif tua di malam hari menemukan petunjuk yang telah lama hilang di kantornya yang berantakan." rows="3"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Suasana Adegan (Atmosphere)</label>
+                                <select id="sceneAtmosphere" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
+                                    <option value="">Pilih Suasana</option><option>Tegang</option><option>Misterius</option><option>Ajaib</option><option>Nostalgia</option><option>Romantis</option><option>Komedi</option><option>Tenteram</option><option>Melankolis</option><option>Futuristik</option><option>Horor</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Alur Cerita / Progresi Adegan</label>
+                                <textarea id="storyProgression" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: Awalnya ia terlihat putus asa, lalu matanya menangkap sebuah foto lama, dan akhirnya ia tersenyum penuh arti." rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section: Characters -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-bold font-lexend text-purple-400 flex items-center gap-3"><span>🧍</span> Karakter</h2>
+                        <div id="characters-container" class="space-y-4"></div>
+                        <button id="add-character" class="w-full text-purple-400 border-2 border-dashed border-gray-600 rounded-md py-2 hover:bg-gray-700 transition">+ Tambah Karakter</button>
+                    </div>
+
+                    <!-- Section: Visuals -->
+                     <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-bold font-lexend text-purple-400 flex items-center gap-3"><span>🎥</span> Pilar 2: Visual & Sinematografi</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Gaya Artistik</label><select id="artisticStyle" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Gaya Artistik</option><option>Sangat Realistis (Hyperrealistic)</option><option>Sinematik 8K</option><option>Film Analog 35mm</option><option>Gaya Dokumenter</option><option>Animasi Ghibli</option><option>Fantasi Epik</option><option>Cyberpunk</option><option>Lukisan Cat Minyak</option></select></div>
+                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Pencahayaan</label><select id="lightingStyle" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Pencahayaan</option><option>Natural Light</option><option>Golden Hour</option><option>Blue Hour</option><option>High-key (Cerah)</option><option>Low-key (Gelap & Kontras)</option><option>Neon Noir</option><option>Rembrandt Lighting</option><option>Backlight (Siluet)</option></select></div>
+                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Camera Shot</label><select id="cameraShot" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Shot</option><option>Wide Shot</option><option>Full Shot</option><option>Medium Shot</option><option>Close-up</option><option>Extreme Close-up</option><option>Point of View (POV)</option><option>Over the Shoulder</option></select></div>
+                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Gerakan Kamera</label><select id="cameraMovement" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Gerakan</option><option>Static</option><option>Pan (Kiri/Kanan)</option><option>Tilt (Atas/Bawah)</option><option>Dolly In/Out</option><option>Zoom In/Out</option><option>Tracking Shot</option><option>Handheld (Genggam)</option><option>Crane Shot</option></select></div>
+                        </div>
+                        <div><label class="block text-sm font-medium text-gray-400 mb-1">Detail Sensorik & Tekstur</label><textarea id="sensoryDetails" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: uap kopi yang mengepul, debu yang beterbangan di sorot lampu..." rows="3"></textarea></div>
+                    </div>
+
+                    <!-- Section: Audio -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-bold font-lexend text-purple-400 flex items-center gap-3"><span>🔊</span> Pilar 3: Audio & Dialog</h2>
+                        <div><label class="block text-sm font-medium text-gray-400 mb-1">Musik Latar</label><input type="text" id="backgroundMusic" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: musik jazz pelan, soundtrack orkestra epik, keheningan"></div>
+                        <div><label class="block text-sm font-medium text-gray-400 mb-1">Efek Suara Penting</label><input type="text" id="soundEffects" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: detak jam dinding, deru hujan di jendela..."></div>
+                        <h3 class="text-lg font-semibold text-pink-400 pt-2 border-t border-gray-700">Dialog</h3>
+                        <div id="dialogues-container" class="space-y-4"></div>
+                        <button id="add-dialogue" class="w-full text-purple-400 border-2 border-dashed border-gray-600 rounded-md py-2 hover:bg-gray-700 transition">+ Tambah Dialog</button>
+                    </div>
+
+                    <!-- Section: Negative Prompt -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-bold font-lexend text-purple-400 flex items-center gap-3"><span>🚫</span> Pengecualian (Negative Prompt)</h2>
+                        <div><label class="block text-sm font-medium text-gray-400 mb-1">Elemen yang ingin dihindari</label><textarea id="negativePrompt" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: kualitas rendah, buram, teks, watermark..." rows="3"></textarea></div>
+                        <div id="negative-presets-container" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Section: Extra Notes -->
+                    <div><label class="block text-sm font-medium text-gray-400 mb-1">Catatan Tambahan (Opsional)</label><textarea id="extraNotes" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Instruksi spesifik yang tidak tercakup di atas." rows="2"></textarea></div>
+
+                </div>
+                <!-- OUTPUT COLUMN -->
+                <div class="space-y-6 lg:sticky top-8 self-start">
+                    <button id="generate-button" class="w-full font-lexend text-xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg py-4 px-6 hover:opacity-90 transition-opacity transform hover:scale-105">Hasilkan Prompt Sinematik</button>
+                    <div id="error-message" class="text-red-400 text-center"></div>
+
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 h-64 flex flex-col">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-lexend font-bold text-lg text-purple-300">Prompt (Bahasa Indonesia)</h3>
+                            <button id="copy-indonesian" class="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600 disabled:opacity-50" disabled>Salin</button>
+                        </div>
+                        <textarea id="indonesian-prompt" readonly class="prompt-output w-full flex-grow bg-transparent text-gray-300 resize-none border-none focus:ring-0 p-2"></textarea>
+                    </div>
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 h-64 flex flex-col">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-lexend font-bold text-lg text-pink-400">Prompt (English for Veo3)</h3>
+                            <button id="copy-english" class="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600 disabled:opacity-50" disabled>Salin</button>
+                        </div>
+                        <textarea id="english-prompt" readonly class="prompt-output w-full flex-grow bg-transparent text-gray-300 resize-none border-none focus:ring-0 p-2"></textarea>
+                    </div>
+                </div>
+            </div>
+            <footer class="text-center py-8"><p class="text-sm text-gray-500">Dibuat oleh Ganif Susanto</p></footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let characterIdCounter = 1;
+            let dialogueIdCounter = 1;
+            
+            const charactersContainer = document.getElementById('characters-container');
+            const dialoguesContainer = document.getElementById('dialogues-container');
+            
+            const addCharacter = () => {
+                const charId = characterIdCounter++;
+                const charDiv = document.createElement('div');
+                charDiv.className = 'bg-gray-700/50 p-4 rounded-md border border-gray-600 relative';
+                charDiv.innerHTML = `
+                    <h3 class="text-lg font-semibold text-pink-400 mb-2">Karakter ${charId}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" data-id="${charId}" data-field="name" class="w-full bg-gray-600 border border-gray-500 rounded p-2" placeholder="Nama Karakter (Contoh: Budi)">
+                        <input type="text" data-id="${charId}" data-field="action" class="w-full bg-gray-600 border border-gray-500 rounded p-2" placeholder="Aksi Spesifik (Contoh: menyesap kopi)">
+                        <div class="md:col-span-2">
+                            <textarea data-id="${charId}" data-field="description" class="w-full bg-gray-600 border border-gray-500 rounded p-2" placeholder="Deskripsi Karakter (Contoh: Pria 50-an, lelah)" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <button class="remove-character absolute top-3 right-3 text-gray-400 hover:text-white">&times;</button>
+                `;
+                charactersContainer.appendChild(charDiv);
+                updateDialogueSpeakers();
+            };
+
+            const addDialogue = () => {
+                const dialogueId = dialogueIdCounter++;
+                const dialogueDiv = document.createElement('div');
+                dialogueDiv.className = 'bg-gray-700/50 p-3 rounded-md border border-gray-600 relative';
+                dialogueDiv.innerHTML = `
+                    <div class="flex gap-4 items-center">
+                        <select data-id="${dialogueId}" data-field="characterId" class="dialogue-speaker bg-gray-600 border border-gray-500 rounded p-2"></select>
+                        <input type="text" data-id="${dialogueId}" data-field="content" class="flex-grow bg-gray-600 border border-gray-500 rounded p-2" placeholder="Dialog...">
+                        <button class="remove-dialogue absolute top-2 right-2 text-gray-400 hover:text-white">&times;</button>
+                    </div>
+                `;
+                dialoguesContainer.appendChild(dialogueDiv);
+                updateDialogueSpeakers();
+            };
+            
+            const updateDialogueSpeakers = () => {
+                const characters = getCharacters();
+                const speakerSelects = document.querySelectorAll('.dialogue-speaker');
+                speakerSelects.forEach(select => {
+                    const selectedValue = select.value;
+                    select.innerHTML = '<option value="">Pilih Karakter</option>';
+                    characters.forEach(char => {
+                        const option = document.createElement('option');
+                        option.value = char.id;
+                        option.textContent = char.name || `Karakter ${char.id}`;
+                        select.appendChild(option);
+                    });
+                    select.value = selectedValue;
+                });
+            };
+
+            const getCharacters = () => {
+                const characterElements = charactersContainer.querySelectorAll('[data-id]');
+                const charData = {};
+                characterElements.forEach(el => {
+                    const id = el.dataset.id;
+                    if (!charData[id]) charData[id] = { id };
+                    charData[id][el.dataset.field] = el.value;
+                });
+                return Object.values(charData);
+            };
+
+            const getDialogues = () => {
+                 const dialogueElements = dialoguesContainer.querySelectorAll('[data-id]');
+                 const dialogueData = {};
+                 dialogueElements.forEach(el => {
+                    const id = el.dataset.id;
+                    if (!dialogueData[id]) dialogueData[id] = { id };
+                    dialogueData[id][el.dataset.field] = el.value;
+                 });
+                 return Object.values(dialogueData);
+            };
+
+            document.getElementById('add-character').addEventListener('click', addCharacter);
+            document.getElementById('add-dialogue').addEventListener('click', addDialogue);
+
+            charactersContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('remove-character')) {
+                    e.target.closest('.relative').remove();
+                    updateDialogueSpeakers();
+                }
+            });
+            dialoguesContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('remove-dialogue')) {
+                    e.target.closest('.relative').remove();
+                }
+            });
+            
+            // Negative Presets
+            const negativePresets = {
+                'Teknis': 'kualitas rendah, buram, teks, watermark, logo, grainy, deformasi, tangan jelek, anatomi buruk, gambar pecah',
+                'Non-Realistis': 'kartun, 3D, animasi, lukisan, gambar, tidak realistis, gaya video game',
+            };
+            const presetsContainer = document.getElementById('negative-presets-container');
+            Object.entries(negativePresets).forEach(([name, value]) => {
+                const button = document.createElement('button');
+                button.className = 'preset-btn text-xs font-semibold text-gray-300 px-3 py-1 rounded-full';
+                button.textContent = `+ Tambah Preset ${name}`;
+                button.onclick = () => {
+                    const currentPrompt = document.getElementById('negativePrompt');
+                    const currentWords = new Set(currentPrompt.value.split(',').map(w => w.trim()).filter(Boolean));
+                    const presetWords = value.split(',').map(w => w.trim());
+                    presetWords.forEach(word => currentWords.add(word));
+                    currentPrompt.value = Array.from(currentWords).join(', ');
+                };
+                presetsContainer.appendChild(button);
+            });
+
+            // Prompt Generation Logic
+            const generateButton = document.getElementById('generate-button');
+            const errorMessage = document.getElementById('error-message');
+
+            const constructPrompt = () => {
+                let parts = [];
+                const getVal = (id) => document.getElementById(id).value.trim();
+
+                if (getVal('mainConcept')) parts.push(`**Konsep Utama:** ${getVal('mainConcept')}.`);
+                if (getVal('sceneAtmosphere')) parts.push(`Ciptakan suasana yang **${getVal('sceneAtmosphere').toLowerCase()}**.`);
+                if (getVal('storyProgression')) parts.push(`**Alur Cerita:** ${getVal('storyProgression')}.`);
+                
+                const characters = getCharacters();
+                const characterDetails = characters.map(c => {
+                    if (!c.name && !c.description && !c.action) return null;
+                    let str = `**${c.name || 'Sebuah karakter'}**`;
+                    if (c.description) str += `, ${c.description},`;
+                    if (c.action) str += ` terlihat sedang **${c.action}**.`;
+                    return str;
+                }).filter(Boolean).join(' ');
+                if (characterDetails) parts.push(characterDetails);
+                
+                let visualCues = [];
+                if (getVal('artisticStyle')) visualCues.push(`dalam gaya visual **${getVal('artisticStyle')}**`);
+                if (getVal('lightingStyle')) visualCues.push(`dengan pencahayaan **${getVal('lightingStyle')}**`);
+                if (getVal('cameraShot')) visualCues.push(`menggunakan **${getVal('cameraShot')}**`);
+                if (getVal('cameraMovement')) visualCues.push(`dan gerakan kamera **${getVal('cameraMovement')}**`);
+                if (visualCues.length > 0) parts.push(`Visualisasikan adegan ini ${visualCues.join(', ')}.`);
+
+                if (getVal('sensoryDetails')) parts.push(`**Detail Sensorik:** Tambahkan detail seperti ${getVal('sensoryDetails')}.`);
+                
+                const dialogues = getDialogues();
+                if (dialogues.some(d => d.content)) {
+                    const dialogueText = dialogues.map(d => {
+                        const speaker = characters.find(c => c.id.toString() === d.characterId.toString());
+                        return `${speaker ? speaker.name : 'Seseorang'} berkata: "{{DIALOGUE_CONTENT_${d.id}}}"`;
+                    }).join('; ');
+                    parts.push(`Terdengar dialog: ${dialogueText}.`);
+                }
+
+                if (getVal('backgroundMusic')) parts.push(`Iringi dengan musik latar **${getVal('backgroundMusic').toLowerCase()}**.`);
+                if (getVal('soundEffects')) parts.push(`Sertakan efek suara seperti **${getVal('soundEffects')}**.`);
+                if (getVal('extraNotes')) parts.push(`**Catatan Tambahan:** ${getVal('extraNotes')}.`);
+                if (getVal('negativePrompt')) parts.push(`**Sangat Penting, Hindari:** ${getVal('negativePrompt')}.`);
+                
+                return parts.join(' ');
+            };
+
+            const translateText = async (text) => {
+                const prompt = `Translate the following text to English for a video generation AI. It's crucial that any text inside double curly braces (e.g., "{{DIALOGUE_CONTENT_123}}") remains completely unchanged. Translate only the text around it. Text to translate:\n\n"${text}"`;
+                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                try {
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    const result = await response.json();
+                    if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0].text) {
+                        return result.candidates[0].content.parts[0].text.replace(/^"|"$/g, '').trim();
+                    } throw new Error("Invalid API response.");
+                } catch (err) {
+                    console.error("Translation API error:", err);
+                    errorMessage.textContent = "Gagal menerjemahkan. Cek koneksi atau coba lagi.";
+                    return `[Translation Failed] ${text}`;
+                }
+            };
+
+            generateButton.addEventListener('click', async () => {
+                generateButton.textContent = 'Menghasilkan...';
+                generateButton.disabled = true;
+                errorMessage.textContent = '';
+                
+                const basePrompt = constructPrompt();
+                const dialogues = getDialogues();
+                
+                let finalIndonesian = basePrompt;
+                dialogues.forEach(d => { finalIndonesian = finalIndonesian.replace(`{{DIALOGUE_CONTENT_${d.id}}}`, `"${d.content}"`); });
+                document.getElementById('indonesian-prompt').value = finalIndonesian;
+                
+                const translatedPrompt = await translateText(basePrompt);
+                let finalEnglish = translatedPrompt;
+                dialogues.forEach(d => {
+                    const placeholderRegex = new RegExp(`\\{\\{\\s*DIALOGUE_CONTENT_${d.id}\\s*\\}\\}`, 'g');
+                    finalEnglish = finalEnglish.replace(placeholderRegex, `"${d.content}"`);
+                });
+                document.getElementById('english-prompt').value = finalEnglish;
+
+                generateButton.textContent = 'Hasilkan Prompt Sinematik';
+                generateButton.disabled = false;
+                document.getElementById('copy-indonesian').disabled = !finalIndonesian;
+                document.getElementById('copy-english').disabled = !finalEnglish;
+            });
+
+            // Copy buttons
+            const copyHandler = (inputId, buttonId) => {
+                const textArea = document.getElementById(inputId);
+                if (!textArea.value) return;
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    const button = document.getElementById(buttonId);
+                    const originalText = button.textContent;
+                    button.textContent = 'Disalin!';
+                    setTimeout(() => { button.textContent = originalText; }, 2000);
+                } catch (err) {
+                    alert('Gagal menyalin!');
+                }
+            };
+            document.getElementById('copy-indonesian').addEventListener('click', () => copyHandler('indonesian-prompt', 'copy-indonesian'));
+            document.getElementById('copy-english').addEventListener('click', () => copyHandler('english-prompt', 'copy-english'));
+
+            // Initial setup
+            addCharacter();
+        });
+    </script>
+</body>
+</html>
