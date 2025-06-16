@@ -45,13 +45,14 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-400 mb-1">Suasana Adegan (Atmosphere)</label>
-                                <select id="sceneAtmosphere" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
-                                    <option value="">Pilih Suasana</option><option>Tegang</option><option>Misterius</option><option>Ajaib</option><option>Nostalgia</option><option>Romantis</option><option>Komedi</option><option>Tenteram</option><option>Melankolis</option><option>Futuristik</option><option>Horor</option>
-                                </select>
+                                <input id="sceneAtmosphere" list="sceneAtmosphere-list" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Ketik atau pilih suasana...">
+                                <datalist id="sceneAtmosphere-list">
+                                    <option value="Tegang"></option><option value="Misterius"></option><option value="Ajaib"></option><option value="Nostalgia"></option><option value="Romantis"></option><option value="Komedi"></option><option value="Tenteram"></option><option value="Melankolis"></option><option value="Futuristik"></option><option value="Horor"></option>
+                                </datalist>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-400 mb-1">Alur Cerita / Progresi Adegan</label>
-                                <textarea id="storyProgression" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: Awalnya ia terlihat putus asa, lalu matanya menangkap sebuah foto lama, dan akhirnya ia tersenyum penuh arti." rows="3"></textarea>
+                                <textarea id="storyProgression" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: Awalnya ia terlihat putus asa, lalu matanya menangkap sebuah foto lama..." rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -67,10 +68,34 @@
                      <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4">
                         <h2 class="text-2xl font-bold font-lexend text-purple-400 flex items-center gap-3"><span>🎥</span> Pilar 2: Visual & Sinematografi</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Gaya Artistik</label><select id="artisticStyle" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Gaya Artistik</option><option>Sangat Realistis (Hyperrealistic)</option><option>Sinematik 8K</option><option>Film Analog 35mm</option><option>Gaya Dokumenter</option><option>Animasi Ghibli</option><option>Fantasi Epik</option><option>Cyberpunk</option><option>Lukisan Cat Minyak</option></select></div>
-                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Pencahayaan</label><select id="lightingStyle" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Pencahayaan</option><option>Natural Light</option><option>Golden Hour</option><option>Blue Hour</option><option>High-key (Cerah)</option><option>Low-key (Gelap & Kontras)</option><option>Neon Noir</option><option>Rembrandt Lighting</option><option>Backlight (Siluet)</option></select></div>
-                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Camera Shot</label><select id="cameraShot" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Shot</option><option>Wide Shot</option><option>Full Shot</option><option>Medium Shot</option><option>Close-up</option><option>Extreme Close-up</option><option>Point of View (POV)</option><option>Over the Shoulder</option></select></div>
-                            <div><label class="block text-sm font-medium text-gray-400 mb-1">Gerakan Kamera</label><select id="cameraMovement" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"><option value="">Pilih Gerakan</option><option>Static</option><option>Pan (Kiri/Kanan)</option><option>Tilt (Atas/Bawah)</option><option>Dolly In/Out</option><option>Zoom In/Out</option><option>Tracking Shot</option><option>Handheld (Genggam)</option><option>Crane Shot</option></select></div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Gaya Artistik</label>
+                                <input id="artisticStyle" list="artisticStyle-list" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Ketik atau pilih gaya...">
+                                <datalist id="artisticStyle-list">
+                                    <option value="Sangat Realistis (Hyperrealistic)"></option><option value="Sinematik 8K"></option><option value="Film Analog 35mm"></option><option value="Gaya Dokumenter"></option><option value="Animasi Ghibli"></option><option value="Fantasi Epik"></option><option value="Cyberpunk"></option><option value="Lukisan Cat Minyak"></option>
+                                </datalist>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Pencahayaan</label>
+                                <input id="lightingStyle" list="lightingStyle-list" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Ketik atau pilih pencahayaan...">
+                                <datalist id="lightingStyle-list">
+                                     <option value="Natural Light"></option><option value="Golden Hour"></option><option value="Blue Hour"></option><option value="High-key (Cerah)"></option><option value="Low-key (Gelap & Kontras)"></option><option value="Neon Noir"></option><option value="Rembrandt Lighting"></option><option value="Backlight (Siluet)"></option>
+                                </datalist>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Camera Shot</label>
+                                <input id="cameraShot" list="cameraShot-list" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Ketik atau pilih shot...">
+                                <datalist id="cameraShot-list">
+                                    <option value="Wide Shot"></option><option value="Full Shot"></option><option value="Medium Shot"></option><option value="Close-up"></option><option value="Extreme Close-up"></option><option value="Point of View (POV)"></option><option value="Over the Shoulder"></option>
+                                </datalist>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Gerakan Kamera</label>
+                                <input id="cameraMovement" list="cameraMovement-list" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Ketik atau pilih gerakan...">
+                                <datalist id="cameraMovement-list">
+                                    <option value="Static"></option><option value="Pan (Kiri/Kanan)"></option><option value="Tilt (Atas/Bawah)"></option><option value="Dolly In/Out"></option><option value="Zoom In/Out"></option><option value="Tracking Shot"></option><option value="Handheld (Genggam)"></option><option value="Crane Shot"></option>
+                                </datalist>
+                            </div>
                         </div>
                         <div><label class="block text-sm font-medium text-gray-400 mb-1">Detail Sensorik & Tekstur</label><textarea id="sensoryDetails" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" placeholder="Contoh: uap kopi yang mengepul, debu yang beterbangan di sorot lampu..." rows="3"></textarea></div>
                     </div>
